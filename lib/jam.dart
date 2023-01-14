@@ -40,7 +40,7 @@ class _JamState extends State<Jam> {
         "mac_address": mac
       });
       var response =
-          await Dio().post("http://192.168.6.3/api/absenlogs", data: formData);
+          await Dio().post("http://192.168.6.3:8000/api/absenlogs", data: formData);
       print(response.statusCode);
       print(response.data);
       return response.data;

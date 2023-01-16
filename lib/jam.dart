@@ -9,6 +9,7 @@ import 'dart:math' as math;
 import 'package:flutter_analog_clock/flutter_analog_clock.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mac_address/mac_address.dart';
+// import 'package:get_mac/get_mac.dart';
 
 import 'fom.dart';
 
@@ -21,9 +22,9 @@ class Jam extends StatefulWidget {
 
 class _JamState extends State<Jam> {
   @override
-  Future uploadImage(File file, String lat, String long, String mac) async {
+  Future uploadImage(File foto, String lat, String long, String mac) async {
     try {
-      if (file == null) {
+      if (foto == null) {
         return "Foto Tidak ada";
       }
       if (mac == null) {
@@ -32,9 +33,19 @@ class _JamState extends State<Jam> {
       if (lat == null || lat == "" && long == null || long == "") {
         return "Foto Tidak ada";
       }
-      String fileName = file.path.split('/').last;
+      String fileName = foto.path.split('/').last;
+      // var dataa = {
+      //   'foto' : foto,
+        // 'lat' : lat,
+        // 'long': long,
+        // 'mac_address' : mac
+      // };
       FormData formData = FormData.fromMap({
-        "foto": await MultipartFile.fromFile(file.path, filename: fileName),
+        "foto": await MultipartFile.fromFile(foto.path, filename: fileName),
+        // 'foto': dataa['foto'] == null ? null : await MultipartFile.fromFile(dataa['foto']),
+        // 'lat' : lat,
+        // 'long': long,
+        // 'mac_address' : mac
         "lat": lat,
         "long": long,
         "mac_address": mac
@@ -43,6 +54,9 @@ class _JamState extends State<Jam> {
           await Dio().post("http://192.168.6.3:8000/api/absenlogs", data: formData);
       print(response.statusCode);
       print(response.data);
+      print("++++");
+      print(formData);
+      print("+++++");
       return response.data;
     } catch (e) {
       return {"message": e.toString()};
@@ -140,8 +154,7 @@ class _JamState extends State<Jam> {
                                                     ? photo = value
                                                     : null
                                               });
-                                      photo != null
-                                          ? uploadImage(
+                                      photo != null ? uploadImage(
                                                   File(photo.path),
                                                   position.latitude.toString(),
                                                   position.longitude.toString(),

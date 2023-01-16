@@ -70,7 +70,7 @@ class _JamState extends State<Jam> {
                 Padding(
                   padding:
                       EdgeInsets.all(MediaQuery.of(context).size.width / 9),
-                  child: Ana(
+                  child: AnalogClock(
                     dateTime: DateTime.now(),
                     isKeepTime: true,
                     child: const Align(

@@ -40,10 +40,10 @@ class _JamState extends State<Jam> {
         "foto": await MultipartFile.fromFile(file.path, filename: fileName),
         "lat": lat,
         "long": long,
-        "mac_address": "sassasasa"
+        "mac_address": "ff:ff:ff:ff:ff:ff"
       });
       var response = await Dio()
-          .post("http://192.168.6.3:8000/api/absenlogs", data: formData);
+          .post("http://192.168.1.74:8000/api/absenlogs", data: formData);
       print(response.statusCode);
       print(response.data);
       return response.data;
@@ -70,12 +70,12 @@ class _JamState extends State<Jam> {
                 Padding(
                   padding:
                       EdgeInsets.all(MediaQuery.of(context).size.width / 9),
-                  child: AnalogClock(
+                  child: Ana(
                     dateTime: DateTime.now(),
                     isKeepTime: true,
                     child: const Align(
                       alignment: FractionalOffset(0.5, 0.75),
-                      child: Text('GMT+8'),
+                      child: Text('GMT+7'),
                     ),
                   ),
                 ),

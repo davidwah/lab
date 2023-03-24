@@ -432,6 +432,68 @@ import 'package:google_fonts/google_fonts.dart';
 // // int switchControl;
 
 // // String hasil;
+void nip(BuildContext context, TextEditingController controller,
+        Function(String) callback) =>
+    showDialog(
+      context: context,
+      builder: (context) => SafeArea(
+        minimum: EdgeInsets.fromLTRB(
+            MediaQuery.of(context).size.height * 0.13,
+            MediaQuery.of(context).size.height * 0.35,
+            MediaQuery.of(context).size.height * 0.13,
+            MediaQuery.of(context).size.height * 0.35),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20.0),
+          child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            backgroundColor: putih,
+            body: Center(
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.4,
+                width: MediaQuery.of(context).size.height * 0.3,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: Center(
+                        child: Text("Masukan NIP",
+                            style: GoogleFonts.roboto(
+                              fontSize: 16,
+                              color: biru,
+                              fontWeight: FontWeight.w500,
+                              textStyle: Theme.of(context).textTheme.subtitle1,
+                            )),
+                      ),
+                    ),
+                    Expanded(
+                      child: Center(
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                          child: TextFormField(
+                            onChanged: (newValue) {
+                              callback(newValue);
+                            },
+                            controller: controller,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(child: SizedBox()),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+                      child: okButton,
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+      // elevation: 5.0,
+    );
 
 void berhasil(BuildContext context, String uraian) => showDialog(
       context: context,
